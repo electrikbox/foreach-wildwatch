@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 import { StyleSheet } from "react-native";
 import Mapbox from '@rnmapbox/maps';
 import { useRouter, useFocusEffect } from 'expo-router';
@@ -100,25 +100,29 @@ export default function Index() {
         </Mapbox.PointAnnotation>
 
         {observations.map((observation) => (
-          <Mapbox.PointAnnotation
-            key={`${observation.id}-${observation.name}-${observation.createdAt || ''}`}
-            id={`pin-${observation.id}`}
+          <Mapbox.MarkerView
+            key={observation.id}
+            id={observation.id}
             coordinate={[observation.longitude, observation.latitude]}
-            onSelected={() => handleObservationPress(observation.id)}
             anchor={{ x: 0.5, y: 1 }}
+            allowOverlap={true}
+            allowOverlapWithPuck={true}
           >
-            <View style={styles.pinWithLabel}>
-              <View style={styles.observationLabel}>
-                <Text style={styles.observationLabelText}>{observation.name}</Text>
+            <TouchableOpacity
+              style={styles.markerContainer}
+              onPress={() => handleObservationPress(observation.id)}
+            >
+              <View style={styles.labelCapsule}>
+                <Text style={styles.labelText}>{observation.name}</Text>
               </View>
               <MaterialIcons
                 name="location-on"
-                size={36}
+                size={50}
                 color="#FF6B35"
                 style={styles.locationIcon}
               />
-            </View>
-          </Mapbox.PointAnnotation>
+            </TouchableOpacity>
+          </Mapbox.MarkerView>
         ))}
       </Mapbox.MapView>
       <View style={styles.statusBarOverlay} />
@@ -165,7 +169,7 @@ const styles = StyleSheet.create({
   annotationContainer: {
     width: 24,
     height: 24,
-    borderRadius: 12,
+    borderRadius: 15,
     backgroundColor: '#007AFF',
     borderWidth: 4,
     borderColor: 'white',
@@ -198,38 +202,39 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     letterSpacing: 0.3,
   },
-  observationLabel: {
-    backgroundColor: 'rgba(0, 0, 0, 0.85)',
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 12,
+  markerContainer: {
     alignItems: 'center',
     justifyContent: 'center',
+    zIndex: 1000,
+    elevation: 10,
+  },
+  labelCapsule: {
+    backgroundColor: '#1a3755',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 12,
+    marginBottom: 2,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 3,
     elevation: 5,
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.2)',
-    marginBottom: 8,
+    maxWidth: 120,
   },
-  observationLabelText: {
+  labelText: {
     color: 'white',
-    fontSize: 12,
-    fontWeight: '700',
+    fontSize: 13,
+    fontWeight: 'bold',
     textAlign: 'center',
-    textShadowColor: 'rgba(0, 0, 0, 0.5)',
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 2,
-  },
-  pinWithLabel: {
-    alignItems: 'center',
-    justifyContent: 'flex-end',
+    flexWrap: 'wrap',
   },
   locationIcon: {
-    textShadowColor: 'rgba(0, 0, 0, 0.3)',
-    textShadowOffset: { width: 1, height: 2 },
-    textShadowRadius: 3,
+    textShadowColor: 'rgba(0, 0, 0, 0.6)',
+    textShadowOffset: {
+      width: 0,
+      height: 2
+    },
+    textShadowRadius: 10,
+    marginTop: -2,
   },
 });

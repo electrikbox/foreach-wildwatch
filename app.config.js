@@ -1,5 +1,5 @@
-{
-  "expo": {
+module.exports = {
+  expo: {
     "name": "foreach-wildwatch",
     "slug": "foreach-wildwatch",
     "version": "1.0.0",
@@ -45,7 +45,7 @@
         "@rnmapbox/maps",
         {
           "RNMapboxMapsImpl": "mapbox",
-          "RNMapboxMapsDownloadToken": "${EXPO_PUBLIC_MAPBOX_DOWNLOAD_TOKEN}"
+          "RNMapboxMapsDownloadToken": process.env.EXPO_PUBLIC_MAPBOX_DOWNLOAD_TOKEN
         }
       ],
       "expo-font"
@@ -54,4 +54,4 @@
       "typedRoutes": true
     }
   }
-}
+};
