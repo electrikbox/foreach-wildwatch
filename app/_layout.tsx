@@ -9,7 +9,16 @@ export default function RootLayout() {
           headerShown: false,
           statusBarStyle: "light",
           statusBarBackgroundColor: "transparent",
+        }}
+      />
+      <Stack.Screen
+        name="observation-form"
+        options={{
+          headerShown: false,
           presentation: "transparentModal",
+          animation: "fade",
+          statusBarStyle: "light",
+          statusBarBackgroundColor: "transparent",
         }}
       />
     </Stack>

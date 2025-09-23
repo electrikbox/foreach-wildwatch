@@ -45,13 +45,13 @@
         "@rnmapbox/maps",
         {
           "RNMapboxMapsImpl": "mapbox",
-          "RNMapboxMapsDownloadToken": "$MAPBOX_DOWNLOAD_TOKEN"
+          "RNMapboxMapsDownloadToken": "${EXPO_PUBLIC_MAPBOX_DOWNLOAD_TOKEN}"
         }
-      ]
+      ],
+      "expo-font"
     ],
     "experiments": {
-      "typedRoutes": true,
-      "reactCompiler": true
+      "typedRoutes": true
     }
   }
 }
