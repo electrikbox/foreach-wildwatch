@@ -1,15 +1,41 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Pressable } from 'react-native';
+import Animated, { useSharedValue, useAnimatedStyle, withSpring } from 'react-native-reanimated';
 import Mapbox from '@rnmapbox/maps';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Observation } from '../../shared/types/observation-types';
 
-interface SimpleMarkerProps {
-  observation: Observation;
-  onPress: () => void;
+interface ObservationMarkersProps {
+  observations: Observation[];
+  onObservationPress: (observationId: string) => void;
 }
 
-const SimpleMarker: React.FC<SimpleMarkerProps> = ({ observation, onPress }) => {
+const ObservationMarker: React.FC<{ observation: Observation; onPress: () => void }> = ({
+  observation,
+  onPress
+}) => {
+  const scale = useSharedValue(1);
+
+  const handlePressIn = () => {
+    scale.value = withSpring(1.2, {
+      damping: 15,
+      stiffness: 150,
+    });
+  };
+
+  const handlePressOut = () => {
+    scale.value = withSpring(1, {
+      damping: 15,
+      stiffness: 150,
+    });
+  };
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ scale: scale.value }],
+    };
+  });
+
   return (
     <Mapbox.MarkerView
       id={observation.id}
@@ -18,28 +44,29 @@ const SimpleMarker: React.FC<SimpleMarkerProps> = ({ observation, onPress }) => 
       allowOverlap={true}
       allowOverlapWithPuck={true}
     >
-      <TouchableOpacity
-        style={styles.markerContainer}
-        onPress={onPress}
-      >
-        <View style={styles.labelCapsule}>
-          <Text style={styles.labelText}>{observation.name}</Text>
-        </View>
-        <MaterialIcons
-          name="location-on"
-          size={50}
-          color="#FF6B35"
-          style={styles.locationIcon}
-        />
-      </TouchableOpacity>
+      <View style={styles.markerWrapper}>
+        <Pressable
+          style={styles.markerContent}
+          onPress={onPress}
+          onPressIn={handlePressIn}
+          onPressOut={handlePressOut}
+        >
+          <Animated.View style={animatedStyle}>
+            <View style={styles.labelCapsule}>
+              <Text style={styles.labelText}>{observation.name}</Text>
+            </View>
+            <MaterialIcons
+              name="location-on"
+              size={50}
+              color="#FF6B35"
+              style={styles.locationIcon}
+            />
+          </Animated.View>
+        </Pressable>
+      </View>
     </Mapbox.MarkerView>
   );
 };
-
-interface ObservationMarkersProps {
-  observations: Observation[];
-  onObservationPress: (observationId: string) => void;
-}
 
 export const ObservationMarkers: React.FC<ObservationMarkersProps> = ({
   observations,
@@ -48,7 +75,7 @@ export const ObservationMarkers: React.FC<ObservationMarkersProps> = ({
   return (
     <>
       {observations.map((observation) => (
-        <SimpleMarker
+        <ObservationMarker
           key={observation.id}
           observation={observation}
           onPress={() => onObservationPress(observation.id)}
@@ -59,7 +86,14 @@ export const ObservationMarkers: React.FC<ObservationMarkersProps> = ({
 };
 
 const styles = StyleSheet.create({
-  markerContainer: {
+  markerWrapper: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 140,
+    height: 100,
+    paddingTop: 10,
+  },
+  markerContent: {
     alignItems: 'center',
     justifyContent: 'center',
     zIndex: 1000,
@@ -76,7 +110,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 3,
     elevation: 5,
-    maxWidth: 120,
+    maxWidth: 130,
+    alignSelf: 'center',
   },
   labelText: {
     color: 'white',
@@ -92,6 +127,6 @@ const styles = StyleSheet.create({
       height: 2
     },
     textShadowRadius: 10,
-    marginTop: -2,
+    alignSelf: 'center',
   },
 });
