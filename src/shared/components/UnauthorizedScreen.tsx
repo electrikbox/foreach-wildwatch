@@ -7,7 +7,7 @@ export const UnauthorizedScreen: React.FC<UnauthorizedScreenProps> = ({ onRetry 
   const openSettings = async () => {
     try {
       await Linking.openSettings();
-    } catch (error) {
+    } catch {
       Alert.alert(
         'Erreur',
         'Impossible d\'ouvrir les paramètres. Veuillez y accéder manuellement.',
@@ -22,7 +22,7 @@ export const UnauthorizedScreen: React.FC<UnauthorizedScreenProps> = ({ onRetry 
         <Text style={styles.icon}>📍</Text>
         <Text style={styles.title}>Accès à la localisation requis</Text>
         <Text style={styles.message}>
-          Cette application a besoin d'accéder à votre position pour afficher la carte et votre localisation.
+          Cette application a besoin d&apos;accéder à votre position pour afficher la carte et votre localisation.
         </Text>
 
         <TouchableOpacity style={styles.primaryButton} onPress={openSettings}>
