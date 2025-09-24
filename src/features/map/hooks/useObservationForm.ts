@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Alert } from 'react-native';
-import { Observation } from '../../../shared/types/observation-types';
-import { useObservations } from '../observation-repository';
+import { Observation } from '../../shared/types/observation-types';
+import { useObservations } from '../services/observation-repository';
 
 export const useObservationForm = () => {
   const router = useRouter();
@@ -26,7 +26,7 @@ export const useObservationForm = () => {
 
   const loadObservation = useCallback(async () => {
     try {
-      const found = observations.find(obs => obs.id === observationId);
+      const found = observations.find((obs: Observation) => obs.id === observationId);
 
       if (found) {
         setObservation(found);

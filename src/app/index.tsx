@@ -2,15 +2,15 @@ import React, { useCallback } from 'react';
 import { View, StyleSheet } from "react-native";
 import Mapbox from '@rnmapbox/maps';
 import { useFocusEffect } from 'expo-router';
-import { useCurrentPosition } from '../../shared/hooks/useCurrentPosition';
-import { useObservations } from '../observation-management/observation-repository';
-import { LoadingScreen } from '../../shared/components/LoadingScreen';
-import { UnauthorizedScreen } from '../../shared/components/UnauthorizedScreen';
-import { UserLocationMarker } from './components/UserLocationMarker';
-import { ObservationMarkers } from './components/ObservationMarkers';
-import { PositionDisplay } from './components/PositionDisplay';
-import { MapStatusOverlay } from './components/MapStatusOverlay';
-import { useMapNavigation } from './hooks/useMapNavigation';
+import { useCurrentPosition } from '../features/shared/hooks/useCurrentPosition';
+import { useObservations } from '../features/map/services/observation-repository';
+import { LoadingScreen } from '../features/shared/components/LoadingScreen';
+import { UnauthorizedScreen } from '../features/shared/components/UnauthorizedScreen';
+import { UserLocationMarker } from '../features/map/components/UserLocationMarker';
+import { ObservationMarkers } from '../features/map/components/ObservationMarkers';
+import { PositionDisplay } from '../features/map/components/PositionDisplay';
+import { MapStatusOverlay } from '../features/map/components/MapStatusOverlay';
+import { useMapNavigation } from '../features/map/hooks/useMapNavigation';
 
 // Configuration du token Mapbox depuis les variables d'environnement
 const MAPBOX_ACCESS_TOKEN = process.env.EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN;

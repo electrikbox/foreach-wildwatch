@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, TouchableWithoutFeedback, StyleSheet } from 'react-native';
-import { FormInput } from './components/forms/FormInput';
-import { CoordinateDisplay } from './components/forms/CoordinateDisplay';
-import { ActionButtons } from './components/forms/ActionButtons';
-import { DeleteButton } from './components/forms/DeleteButton';
-import { LoadingModal } from './components/modals/LoadingModal';
-import { useObservationForm } from './hooks/useObservationForm';
+import { FormInput } from '../features/map/components/forms/FormInput';
+import { CoordinateDisplay } from '../features/map/components/forms/CoordinateDisplay';
+import { ActionButtons } from '../features/map/components/forms/ActionButtons';
+import { DeleteButton } from '../features/map/components/forms/DeleteButton';
+import { LoadingModal } from '../features/map/components/modals/LoadingModal';
+import { useObservationForm } from '../features/map/hooks/useObservationForm';
 
 export default function ObservationForm() {
   const {

@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import Mapbox from '@rnmapbox/maps';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Observation } from '../../../shared/types/observation-types';
+import { Observation } from '../../shared/types/observation-types';
 
 interface SimpleMarkerProps {
   observation: Observation;
