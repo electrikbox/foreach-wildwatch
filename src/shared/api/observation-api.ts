@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Observation } from '../types';
+import { Observation } from '../types/observation-types';
 
 const STORAGE_KEY = 'observations';
 

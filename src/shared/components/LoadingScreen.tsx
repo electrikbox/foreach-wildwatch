@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { LoadingScreenProps } from '../types';
+import { LoadingScreenProps } from '../types/observation-types';
 
 export const LoadingScreen: React.FC<LoadingScreenProps> = ({
   message = "Chargement de votre position..."

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Linking, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { UnauthorizedScreenProps } from '../types';
+import { UnauthorizedScreenProps } from '../types/observation-types';
 
 export const UnauthorizedScreen: React.FC<UnauthorizedScreenProps> = ({ onRetry }) => {
   const openSettings = async () => {

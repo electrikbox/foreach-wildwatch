@@ -1,11 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Observation } from '../types';
+import { Observation } from '../../shared/types/observation-types';
 import {
   getObservations,
   addObservation as apiAddObservation,
   updateObservation as apiUpdateObservation,
   deleteObservation as apiDeleteObservation
-} from '../api/api';
+} from '../../shared/api/observation-api';
 
 export const useObservations = () => {
   const [observations, setObservations] = useState<Observation[]>([]);

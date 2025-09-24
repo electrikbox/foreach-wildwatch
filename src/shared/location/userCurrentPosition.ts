@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import * as Location from 'expo-location';
-import { LocationStatus, UseCurrentPositionReturn } from '../types';
+import { LocationStatus, UseCurrentPositionReturn } from '../types/observation-types';
 
 export const useCurrentPosition = (): UseCurrentPositionReturn => {
   const [location, setLocation] = useState<Location.LocationObject | null>(null);
