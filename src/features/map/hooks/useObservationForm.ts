@@ -18,6 +18,7 @@ export const useObservationForm = () => {
   const [observation, setObservation] = useState<Observation | null>(null);
   const [name, setName] = useState('');
   const [date, setDate] = useState('');
+  const [photo, setPhoto] = useState<string | undefined>();
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingData, setIsLoadingData] = useState(mode === 'edit');
   const [isDeleting, setIsDeleting] = useState(false);
@@ -32,6 +33,7 @@ export const useObservationForm = () => {
         setObservation(found);
         setName(found.name);
         setDate(new Date(found.date).toISOString().split('T')[0]);
+        setPhoto(found.photo);
       } else {
         Alert.alert('Erreur', 'Observation non trouvée');
         router.back();
@@ -63,7 +65,10 @@ export const useObservationForm = () => {
     setIsLoading(true);
     try {
       if (isEditMode && observation) {
-        await updateObservation(observation.id, { name: name.trim() });
+        await updateObservation(observation.id, {
+          name: name.trim(),
+          photo
+        });
         router.back();
       } else {
         const newObservationData = {
@@ -71,6 +76,7 @@ export const useObservationForm = () => {
           latitude: parseFloat(latitude as string),
           longitude: parseFloat(longitude as string),
           date: new Date(date).toISOString(),
+          photo,
         };
         await addObservation(newObservationData);
         router.back();
@@ -109,12 +115,21 @@ export const useObservationForm = () => {
     ? (isLoading ? 'Modification...' : 'Modifier')
     : (isLoading ? 'Enregistrement...' : 'Enregistrer');
 
+  const handlePhotoSelected = (uri: string) => {
+    setPhoto(uri);
+  };
+
+  const handlePhotoRemoved = () => {
+    setPhoto(undefined);
+  };
+
   return {
     // State
     name,
     setName,
     date,
     setDate,
+    photo,
     isLoading,
     isLoadingData,
     isEditMode,
@@ -129,6 +144,8 @@ export const useObservationForm = () => {
     saveObservation,
     deleteObservation,
     handleCancel,
+    handlePhotoSelected,
+    handlePhotoRemoved,
 
     // Loading states
     isLoadingForm: isLoadingData || (isEditMode && isLoadingObservations),

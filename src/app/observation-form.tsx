@@ -4,7 +4,8 @@ import { FormInput } from '../features/map/components/forms/FormInput';
 import { CoordinateDisplay } from '../features/map/components/forms/CoordinateDisplay';
 import { ActionButtons } from '../features/map/components/forms/ActionButtons';
 import { DeleteButton } from '../features/map/components/forms/DeleteButton';
-import { LoadingModal } from '../features/map/components/modals/LoadingModal';
+import { LoadingModal } from '../features/shared/components/LoadingModal';
+import { PhotoPicker } from '../features/map/components/forms/PhotoPicker';
 import { useObservationForm } from '../features/map/hooks/useObservationForm';
 
 export default function ObservationForm() {
@@ -13,6 +14,7 @@ export default function ObservationForm() {
     setName,
     date,
     setDate,
+    photo,
     isLoading,
     isEditMode,
     title,
@@ -22,6 +24,8 @@ export default function ObservationForm() {
     saveObservation,
     deleteObservation,
     handleCancel,
+    handlePhotoSelected,
+    handlePhotoRemoved,
     isLoadingForm,
   } = useObservationForm();
 
@@ -39,6 +43,12 @@ export default function ObservationForm() {
         <CoordinateDisplay
           latitude={displayLatitude!}
           longitude={displayLongitude!}
+        />
+
+        <PhotoPicker
+          photo={photo}
+          onPhotoSelected={handlePhotoSelected}
+          onPhotoRemoved={handlePhotoRemoved}
         />
 
         <FormInput

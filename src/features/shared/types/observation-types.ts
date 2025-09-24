@@ -9,6 +9,7 @@ export interface Observation {
   longitude: number;
   date: string;
   createdAt: string;
+  photo?: string; // URI de la photo stockée
 }
 
 // ==================== LOCATION/POSITION ====================

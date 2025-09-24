@@ -62,6 +62,7 @@ npm run prebuild   # Clean prebuild for native platforms
 
 The app requires environment variables for Mapbox integration:
 - `EXPO_PUBLIC_MAPBOX_DOWNLOAD_TOKEN` - Required for Mapbox SDK
+- `EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN` - Required for map rendering
 
 ## Data Models
 
