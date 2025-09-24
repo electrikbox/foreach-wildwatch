@@ -2,8 +2,7 @@ import React from 'react';
 import { View, Text, TouchableWithoutFeedback, StyleSheet } from 'react-native';
 import { FormInput } from '../features/map/components/forms/FormInput';
 import { CoordinateDisplay } from '../features/map/components/forms/CoordinateDisplay';
-import { ActionButtons } from '../features/map/components/forms/ActionButtons';
-import { DeleteButton } from '../features/map/components/forms/DeleteButton';
+import { FormButtons } from '../features/map/components/forms/FormButtons';
 import { LoadingModal } from '../features/shared/components/LoadingModal';
 import { PhotoPicker } from '../features/map/components/forms/PhotoPicker';
 import { useObservationForm } from '../features/map/hooks/useObservationForm';
@@ -66,19 +65,14 @@ export default function ObservationForm() {
           placeholder="YYYY-MM-DD"
         />
 
-        <ActionButtons
+        <FormButtons
           onSave={saveObservation}
           onCancel={handleCancel}
+          onDelete={deleteObservation}
           saveButtonText={saveButtonText}
           isLoading={isLoading}
+          showDeleteButton={isEditMode}
         />
-
-        {isEditMode && (
-          <DeleteButton
-            onDelete={deleteObservation}
-            isLoading={isLoading}
-          />
-        )}
           </View>
         </TouchableWithoutFeedback>
       </View>

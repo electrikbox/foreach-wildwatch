@@ -10,10 +10,10 @@ interface ObservationMarkersProps {
   onObservationPress: (observationId: string) => void;
 }
 
-const ObservationMarker: React.FC<{ observation: Observation; onPress: () => void }> = ({
-  observation,
-  onPress
-}) => {
+const ObservationMarker: React.FC<{
+  observation: Observation;
+  onPress: () => void;
+}> = ({ observation, onPress }) => {
   const scale = useSharedValue(1);
 
   const handlePressIn = () => {
