@@ -19,7 +19,7 @@ ForEach WildWatch permet aux utilisateurs de suivre et d'enregistrer toutes sort
 
 1. Cloner le projet
    ```bash
-   git clone <url-du-repo>
+   git clone git@github.com:electrikbox/foreach-wildwatch.git
    cd foreach-wildwatch
    ```
 
