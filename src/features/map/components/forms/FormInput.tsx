@@ -33,19 +33,19 @@ export const FormInput: React.FC<FormInputProps> = ({
 
 const styles = StyleSheet.create({
   inputContainer: {
-    marginBottom: 30,
+    marginBottom: 20,
   },
   inputLabel: {
     fontSize: 16,
     fontWeight: '600',
     color: '#333',
-    marginBottom: 10,
+    marginBottom: 5,
   },
   input: {
     borderWidth: 2,
     borderColor: '#ddd',
     borderRadius: 10,
-    padding: 15,
+    padding: 10,
     fontSize: 16,
     backgroundColor: '#f9f9f9',
   },

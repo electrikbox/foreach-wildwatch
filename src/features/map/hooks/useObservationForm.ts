@@ -107,9 +107,6 @@ export const useObservationForm = () => {
     router.back();
   };
 
-  const displayLatitude = isEditMode ? observation?.latitude : parseFloat(latitude as string);
-  const displayLongitude = isEditMode ? observation?.longitude : parseFloat(longitude as string);
-
   const title = isEditMode ? 'Modifier l\'observation' : 'Nouvelle observation';
   const saveButtonText = isEditMode
     ? (isLoading ? 'Modification...' : 'Modifier')
@@ -137,8 +134,6 @@ export const useObservationForm = () => {
     // Computed values
     title,
     saveButtonText,
-    displayLatitude,
-    displayLongitude,
 
     // Actions
     saveObservation,

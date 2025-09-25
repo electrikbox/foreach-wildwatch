@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     color: '#333',
-    marginBottom: 8,
+    marginBottom: 5,
   },
   photoContainer: {
     width: '100%',

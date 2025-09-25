@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableWithoutFeedback, StyleSheet } from 'react-native';
 import { FormInput } from '../features/map/components/forms/FormInput';
-import { CoordinateDisplay } from '../features/map/components/forms/CoordinateDisplay';
 import { FormButtons } from '../features/map/components/forms/FormButtons';
 import { LoadingModal } from '../features/shared/components/LoadingModal';
 import { PhotoPicker } from '../features/map/components/forms/PhotoPicker';
@@ -18,8 +17,6 @@ export default function ObservationForm() {
     isEditMode,
     title,
     saveButtonText,
-    displayLatitude,
-    displayLongitude,
     saveObservation,
     deleteObservation,
     handleCancel,
@@ -38,11 +35,6 @@ export default function ObservationForm() {
         <TouchableWithoutFeedback onPress={() => {}}>
           <View style={styles.modal}>
         <Text style={styles.title}>{title}</Text>
-
-        {/* <CoordinateDisplay
-          latitude={displayLatitude!}
-          longitude={displayLongitude!}
-        /> */}
 
         <PhotoPicker
           photo={photo}

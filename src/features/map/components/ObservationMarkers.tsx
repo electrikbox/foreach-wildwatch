@@ -44,14 +44,14 @@ const ObservationMarker: React.FC<{
       allowOverlap={true}
       allowOverlapWithPuck={true}
     >
-      <View style={styles.markerWrapper}>
+      <Animated.View style={[styles.markerWrapper, animatedStyle]}>
         <Pressable
           style={styles.markerContent}
           onPress={onPress}
           onPressIn={handlePressIn}
           onPressOut={handlePressOut}
         >
-          <Animated.View style={animatedStyle}>
+          <View>
             <View style={styles.labelCapsule}>
               <Text style={styles.labelText}>{observation.name}</Text>
             </View>
@@ -61,9 +61,9 @@ const ObservationMarker: React.FC<{
               color="#FF6B35"
               style={styles.locationIcon}
             />
-          </Animated.View>
+          </View>
         </Pressable>
-      </View>
+      </Animated.View>
     </Mapbox.MarkerView>
   );
 };
