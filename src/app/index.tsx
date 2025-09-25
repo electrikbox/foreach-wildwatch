@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { View, StyleSheet } from "react-native";
 import Mapbox from '@rnmapbox/maps';
 import { useFocusEffect } from 'expo-router';
@@ -26,6 +26,7 @@ export default function Index() {
   const { location, status, error, requestPermission } = useCurrentPosition();
   const { observations, refreshObservations } = useObservations();
   const { handleMapPress, handleObservationPress } = useMapNavigation();
+  const [mapLoaded, setMapLoaded] = useState(false);
 
   useFocusEffect(
     useCallback(() => {
@@ -65,7 +66,7 @@ export default function Index() {
         logoEnabled={false}
         compassEnabled={false}
         onPress={handleMapPress}
-        onDidFinishLoadingMap={() => {}}
+        onDidFinishLoadingMap={() => setMapLoaded(true)}
       >
         <Mapbox.Camera
           centerCoordinate={[location.coords.longitude, location.coords.latitude]}
@@ -80,6 +81,7 @@ export default function Index() {
         <ObservationMarkers
           observations={observations}
           onObservationPress={handleObservationPress}
+          mapLoaded={mapLoaded}
         />
       </Mapbox.MapView>
       <MapStatusOverlay />
