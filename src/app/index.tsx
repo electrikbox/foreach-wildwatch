@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useRef } from 'react';
 import { View, StyleSheet } from "react-native";
 import Mapbox from '@rnmapbox/maps';
 import { useFocusEffect } from 'expo-router';
@@ -10,6 +10,7 @@ import { UserLocationMarker } from '../features/map/components/UserLocationMarke
 import { ObservationMarkers } from '../features/map/components/ObservationMarkers';
 import { PositionDisplay } from '../features/map/components/PositionDisplay';
 import { MapStatusOverlay } from '../features/map/components/MapStatusOverlay';
+import { RecenterButton } from '../features/map/components/RecenterButton';
 import { useMapNavigation } from '../features/map/hooks/useMapNavigation';
 
 // Configuration du token Mapbox depuis les variables d'environnement
@@ -27,12 +28,24 @@ export default function Index() {
   const { observations, refreshObservations } = useObservations();
   const { handleMapPress, handleObservationPress } = useMapNavigation();
   const [mapLoaded, setMapLoaded] = useState(false);
+  const cameraRef = useRef<Mapbox.Camera>(null);
 
   useFocusEffect(
     useCallback(() => {
       refreshObservations();
     }, [refreshObservations])
   );
+
+  const handleRecenter = useCallback(() => {
+    if (location && cameraRef.current) {
+      cameraRef.current.setCamera({
+        centerCoordinate: [location.coords.longitude, location.coords.latitude],
+        zoomLevel: 15,
+        animationDuration: 500,
+        animationMode: 'easeTo',
+      });
+    }
+  }, [location]);
 
 
 
@@ -69,10 +82,11 @@ export default function Index() {
         onDidFinishLoadingMap={() => setMapLoaded(true)}
       >
         <Mapbox.Camera
+          ref={cameraRef}
           centerCoordinate={[location.coords.longitude, location.coords.latitude]}
           zoomLevel={15}
           animationMode="flyTo"
-          animationDuration={1000}
+          animationDuration={500}
         />
         <UserLocationMarker
           coordinate={[location.coords.longitude, location.coords.latitude]}
@@ -85,6 +99,7 @@ export default function Index() {
         />
       </Mapbox.MapView>
       <MapStatusOverlay />
+      <RecenterButton onPress={handleRecenter} />
       <PositionDisplay
         latitude={location.coords.latitude}
         longitude={location.coords.longitude}
