@@ -39,10 +39,10 @@ export default function ObservationForm() {
           <View style={styles.modal}>
         <Text style={styles.title}>{title}</Text>
 
-        <CoordinateDisplay
+        {/* <CoordinateDisplay
           latitude={displayLatitude!}
           longitude={displayLongitude!}
-        />
+        /> */}
 
         <PhotoPicker
           photo={photo}
