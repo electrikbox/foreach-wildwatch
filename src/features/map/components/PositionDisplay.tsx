@@ -15,10 +15,10 @@ export const PositionDisplay: React.FC<PositionDisplayProps> = ({
       <Text style={styles.positionTitle}>Ma position:</Text>
       <View style={styles.coordinatesRow}>
         <Text style={styles.positionText}>
-          Latitude: {latitude.toFixed(6)}
+          Latitude: {latitude.toFixed(3)}
         </Text>
         <Text style={styles.positionText}>
-          Longitude: {longitude.toFixed(6)}
+          Longitude: {longitude.toFixed(3)}
         </Text>
       </View>
     </View>

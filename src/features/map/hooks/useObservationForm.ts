@@ -17,7 +17,7 @@ export const useObservationForm = () => {
 
   const [observation, setObservation] = useState<Observation | null>(null);
   const [name, setName] = useState('');
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState(new Date());
   const [photo, setPhoto] = useState<string | undefined>();
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingData, setIsLoadingData] = useState(mode === 'edit');
@@ -32,7 +32,7 @@ export const useObservationForm = () => {
       if (found) {
         setObservation(found);
         setName(found.name);
-        setDate(new Date(found.date).toISOString().split('T')[0]);
+        setDate(new Date(found.date));
         setPhoto(found.photo);
       } else {
         Alert.alert('Erreur', 'Observation non trouvée');
@@ -51,7 +51,7 @@ export const useObservationForm = () => {
     if (isEditMode && observationId && !isLoadingObservations && observations.length > 0 && !isDeleting) {
       loadObservation();
     } else if (!isEditMode) {
-      setDate(new Date().toISOString().split('T')[0]);
+      setDate(new Date());
     }
   }, [observationId, isEditMode, observations, isLoadingObservations, isDeleting, loadObservation]);
 
@@ -75,7 +75,7 @@ export const useObservationForm = () => {
           name: name.trim(),
           latitude: parseFloat(latitude as string),
           longitude: parseFloat(longitude as string),
-          date: new Date(date).toISOString(),
+          date: date.toISOString(),
           photo,
         };
         await addObservation(newObservationData);

@@ -4,6 +4,7 @@ import { FormInput } from '../features/map/components/forms/FormInput';
 import { FormButtons } from '../features/map/components/forms/FormButtons';
 import { LoadingModal } from '../features/shared/components/LoadingModal';
 import { PhotoPicker } from '../features/map/components/forms/PhotoPicker';
+import { DatePicker } from '../features/map/components/forms/DatePicker';
 import { useObservationForm } from '../features/map/hooks/useObservationForm';
 
 export default function ObservationForm() {
@@ -50,11 +51,10 @@ export default function ObservationForm() {
           autoFocus
         />
 
-        <FormInput
+        <DatePicker
           label="Date :"
           value={date}
-          onChangeText={setDate}
-          placeholder="YYYY-MM-DD"
+          onChange={setDate}
         />
 
         <FormButtons
